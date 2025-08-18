@@ -1,9 +1,15 @@
-numpy>=1.26.0,<1.27
-pandas==2.2.2
-pydantic==1.10.15
+# Data & ML
+numpy==2.3.0
+pandas==2.3.0
+scikit-learn==1.7.0
+joblib==1.4.2
+
+# FastAPI & server
+fastapi==0.116.1
+pydantic==1.10.12       
+uvicorn[standard]==0.23.1
+orjson==3.10.18
+
+# HTTP requests / load testing
 requests==2.32.3
 locust==2.37.10
-fastapi==0.115.0
-scikit-learn==1.4.2
-uvicorn[standard]==0.30.6
-joblib==1.4.2
