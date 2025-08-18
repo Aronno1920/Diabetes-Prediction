@@ -51,7 +51,7 @@ app = FastAPI(
 )
 
 # -------------------------
-# FastAPI CROS middleware
+# FastAPI CORS middleware
 # -------------------------
 app.add_middleware(
     CORSMiddleware,
