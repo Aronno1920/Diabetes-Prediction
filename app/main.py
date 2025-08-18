@@ -1,13 +1,16 @@
-# app/main.py
-
+import os
 import asyncio
 from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import ORJSONResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 
 from .schemas import PatientData
 from .ml_model import MLModel
+
 
 # -------------------------
 # Paths
@@ -45,6 +48,17 @@ app = FastAPI(
     description="API for predicting diabetes using Pima Indians dataset",
     lifespan=lifespan,
     default_response_class=ORJSONResponse,
+)
+
+# -------------------------
+# FastAPI CROS middleware
+# -------------------------
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],      # tighten this in prod
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
@@ -123,3 +137,8 @@ async def predict(request: PatientData):
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
+
+
+# Serve static frontend files
+BASE_DIR = os.path.dirname(__file__)
+app.mount("/", StaticFiles(directory=os.path.join(BASE_DIR, "static"), html=True), name="static")

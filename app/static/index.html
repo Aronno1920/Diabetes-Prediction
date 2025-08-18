@@ -1,112 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Diabetes Predictor</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="utf-8" />
+  <title>Diabetes Prediction</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
-<body class="bg-gradient-to-br from-blue-200 to-blue-100 min-h-screen flex items-center justify-center font-sans">
-  <div class="bg-white shadow-2xl rounded-2xl p-10 max-w-4xl w-full">
-    
-    <!-- Header -->
-    <h1 class="text-4xl font-bold text-center text-gray-800 mb-10">Diabetes Prediction</h1>
-    
+<body>
+  <header class="container">
+    <h1>Diabetes Prediction</h1>
+    <p class="subtle">Pima Indians dataset · FastAPI backend</p>
+    <div id="health" class="badge">Checking health…</div>
+  </header>
+
+  <main class="container grid">
     <!-- Form -->
-    <form id="form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      
-      <!-- Input Template -->
-      <div class="relative">
-        <span class="absolute left-3 top-3 text-gray-400">
-          <!-- Example Icon: User -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </span>
-        <input type="number" name="Pregnancies" placeholder="Pregnancies" required 
-               class="pl-10 w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+    <section class="card">
+      <h2>Enter Patient Data</h2>
+      <form id="predict-form">
+        <div class="grid-2">
+          <label>Pregnancies
+            <input type="number" id="Pregnancies" min="0" step="1" required />
+          </label>
+          <label>Glucose
+            <input type="number" id="Glucose" min="0" max="300" step="1" required />
+          </label>
+          <label>Blood Pressure
+            <input type="number" id="BloodPressure" min="0" max="200" step="1" required />
+          </label>
+          <label>Skin Thickness
+            <input type="number" id="SkinThickness" min="0" max="100" step="1" required />
+          </label>
+          <label>Insulin
+            <input type="number" id="Insulin" min="0" max="1000" step="1" required />
+          </label>
+          <label>BMI
+            <input type="number" id="BMI" min="0" max="80" step="0.1" required />
+          </label>
+          <label>Diabetes Pedigree Function
+            <input type="number" id="DiabetesPedigreeFunction" min="0" max="3" step="0.01" required />
+          </label>
+          <label>Age
+            <input type="number" id="Age" min="1" max="120" step="1" required />
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="submit-btn" type="submit">Predict</button>
+          <span id="loading" class="loading hidden">Predicting…</span>
+        </div>
+        <p id="form-error" class="error hidden"></p>
+      </form>
+    </section>
+
+    <!-- Result -->
+    <section class="card">
+      <h2>Result</h2>
+      <div id="result" class="result empty">
+        <p class="subtle">No prediction yet.</p>
       </div>
-      
-      <div class="relative">
-        <span class="absolute left-3 top-3 text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-        </span>
-        <input type="number" name="Glucose" placeholder="Glucose" required 
-               class="pl-10 w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
-      </div>
-      
-      <div class="relative">
-        <span class="absolute left-3 top-3 text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4s-4 1.79-4 4 1.79 4 4 4z"/>
-          </svg>
-        </span>
-        <input type="number" name="BloodPressure" placeholder="Blood Pressure" required 
-               class="pl-10 w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
-      </div>
-      
-      <div class="relative">
-        <span class="absolute left-3 top-3 text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </span>
-        <input type="number" name="SkinThickness" placeholder="Skin Thickness" required 
-               class="pl-10 w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
-      </div>
-      
-      <div class="relative">
-        <span class="absolute left-3 top-3 text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12v.01M16 12v.01M8 12v.01"/>
-          </svg>
-        </span>
-        <input type="number" name="Insulin" placeholder="Insulin" required 
-               class="pl-10 w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
-      </div>
-      
-      <div class="relative">
-        <span class="absolute left-3 top-3 text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-          </svg>
-        </span>
-        <input type="number" step="0.1" name="BMI" placeholder="BMI" required 
-               class="pl-10 w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
-      </div>
-      
-      <div class="relative md:col-span-2">
-        <span class="absolute left-3 top-3 text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </span>
-        <input type="number" step="0.01" name="DiabetesPedigreeFunction" placeholder="Diabetes Pedigree Function" required 
-               class="pl-10 w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
-      </div>
-      
-      <div class="relative md:col-span-2">
-        <span class="absolute left-3 top-3 text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-        </span>
-        <input type="number" name="Age" placeholder="Age" required 
-               class="pl-10 w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
-      </div>
-      
-      <!-- Gradient Button -->
-      <div class="md:col-span-2">
-        <button type="submit" 
-                class="w-full py-3 text-white font-bold rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 shadow-lg transform hover:-translate-y-1 transition-all">
-          Predict
-        </button>
-      </div>
-    </form>
-    
-    <!-- Result Box -->
-    <div id="result" class="mt-6 p-4 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 rounded-lg hidden text-center font-semibold shadow-inner"></div>
-  </div>
+    </section>
+
+    <!-- Model Info -->
+    <section class="card">
+      <h2>Model Info</h2>
+      <div id="info"><p class="subtle">Loading…</p></div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="card">
+      <h2>Metrics</h2>
+      <div id="metrics"><p class="subtle">Loading…</p></div>
+    </section>
+  </main>
+
+  <footer class="container subtle">
+    <small>Backend: FastAPI · Frontend: HTML/CSS/JS</small>
+  </footer>
+
+  <script src="./app.js" defer></script>
 </body>
 </html>
