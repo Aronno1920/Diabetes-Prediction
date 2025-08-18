@@ -62,9 +62,11 @@ for name, model in models.items():
 model_path = "../model/diabetes_model.joblib"
 joblib.dump(best_model, model_path)
 
-with open("../model/metrics.json", "w") as f:
+
+metric_path = "../model/metrics.json"
+with open(metric_path, "w") as f:
     json.dump({"best_model": best_model_name, "metrics": metrics_summary}, f, indent=4)
 
 print(f"✅ Best model: {best_model_name}")
 print(f"✅ Model saved to {model_path}")
-print(f"✅ Metrics saved to metrics.json")
+print(f"✅ Metrics saved to {metric_path}")
