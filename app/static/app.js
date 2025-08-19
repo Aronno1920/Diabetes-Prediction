@@ -1,5 +1,7 @@
 // === Config: set your backend URL here ===
-const API_BASE_URL = "http://127.0.0.1:8000"; 
+
+const API_BASE_URL = window.location.origin || "http://127.0.0.1:8000";
+const LOCUST_URL = API_BASE_URL.replace(/:\d+$/, ":8089");  // swap port
 
 // --- Helpers ---
 const $ = (id) => document.getElementById(id);
@@ -98,6 +100,13 @@ async function fetchHealth() {
   }
 }
 
+async function setApiUrl() {
+  document.getElementById("swagger-link").href = `${API_BASE_URL}/docs`;
+  document.getElementById("redoc-link").href = `${API_BASE_URL}/redoc`;
+  document.getElementById("locust-link").href = LOCUST_URL;
+} 
+
+
 async function fetchInfo() {
   const el = $("info");
   try {
@@ -156,10 +165,10 @@ function renderMetricsTable(obj) {
   return `<table class="table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-
 // --- Init ---
 document.addEventListener("DOMContentLoaded", () => {
   $("predict-form").addEventListener("submit", onSubmit);
   fetchHealth();
   fetchInfo();
+  setApiUrl();
 });
