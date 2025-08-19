@@ -37,6 +37,7 @@ class MLModel:
 
         print("✅ Model loaded successfully.")
 
+
     def predict(self, data: List[float]) -> Tuple[int, float]:
         """
         Predict the class (0 or 1) and confidence for the given input data.
@@ -56,11 +57,13 @@ class MLModel:
 
         return pred_class, confidence
 
+
     def get_metrics(self) -> Optional[Dict]:
         """
         Return the stored metrics of the model, if available.
         """
         return self.metrics
+
 
     def get_feature_info(self) -> List[str]:
         """

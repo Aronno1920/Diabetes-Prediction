@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Diabetes Prediction</title>
+  <title>Diabetes Prediction System</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <header class="container">
-    <h1>Diabetes Prediction</h1>
-    <p class="subtle">Pima Indians dataset · FastAPI backend</p>
+    <h1>Diabetes Prediction System</h1>
+    <p class="subtle">A production-ready FastAPI-based web application for predicting diabetes risk using patient health data. This project demonstrates machine learning deployment, API design and Stress Testing, and modern UI integration to make healthcare predictions accessible via a simple dashboard and REST API.</p>
     <div id="health" class="badge">Checking health…</div>
   </header>
 
@@ -67,15 +67,28 @@
       <div id="info"><p class="subtle">Loading…</p></div>
     </section>
 
-    <!-- Metrics -->
+    <!-- Docs -->
     <section class="card">
-      <h2>Metrics</h2>
-      <div id="metrics"><p class="subtle">Loading…</p></div>
+      <h2>API & Stress Test</h2>
+      <div class="kv">
+        <div>API Docs</div>
+        <div><a href="http://localhost:8000/docs" target="_blank">Swagger</a></div>
+        <div>API Redoc</div>
+        <div><a href="http://localhost:8000/redoc" target="_blank">Redoc</a></div>
+        <div>Strss Test</div>
+        <div><a href="http://localhost:8089" target="_blank">Locust</a></div>
+      </div>
     </section>
   </main>
 
   <footer class="container subtle">
-    <small>Backend: FastAPI · Frontend: HTML/CSS/JS</small>
+    <small>Backend: FastAPI · Frontend: HTML/CSS/JS</small><br/>
+    <small>Developed: Selim Ahmed
+       · 
+      <a href="https://www.linkedin.com/in/aronno1920/" target="_blank">LinkedIn</a>
+       · 
+      <a href="https://github.com/Aronno1920" target="_blank">Github</a>
+    </small>
   </footer>
 
   <script src="./app.js" defer></script>

@@ -156,17 +156,17 @@ function renderMetricsTable(obj) {
   return `<table class="table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-async function fetchMetrics() {
-  const el = $("metrics");
-  try {
-    const res = await fetch(`${API_BASE_URL}/metrics`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    el.innerHTML = renderMetricsTable(data);
-  } catch (e) {
-    el.innerHTML = `<p class="subtle">Metrics not available.</p>`;
-  }
-}
+// async function fetchMetrics() {
+//   const el = $("metrics");
+//   try {
+//     const res = await fetch(`${API_BASE_URL}/metrics`);
+//     if (!res.ok) throw new Error(`HTTP ${res.status}`);
+//     const data = await res.json();
+//     el.innerHTML = renderMetricsTable(data);
+//   } catch (e) {
+//     el.innerHTML = `<p class="subtle">Metrics not available.</p>`;
+//   }
+// }
 
 // --- Init ---
 document.addEventListener("DOMContentLoaded", () => {
