@@ -150,7 +150,7 @@ Response:
 <br/>
 
 ## 🚦 Stress Testing with Locust
-**1.** Visit 👉 http://localhost:8089<br/>
+**1.** Visit: http://localhost:8089<br/>
 **2.** Enter:<br/>
 - Host → http://localhost:8000<br/>
 - Users → Number of simulated users<br/>
