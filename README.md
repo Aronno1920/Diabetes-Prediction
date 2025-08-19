@@ -1,7 +1,7 @@
-# ❤️ API : Predict Heart Disease
-Build a simple **FastAPI** app that serves predictions from a machine learning classifier trained on the Heart Disease Dataset, Dockerize it, and deploy to Render (or any cloud host of your choice). Focus on Docker and deployment, not on achieving high accuracy.
+# Diabetes Prediction System
+A production-ready **FastAPI** based web application for predicting diabetes risk using patient health data. This project demonstrates machine learning deployment, API design and Stress testing, and modern UI integration to make healthcare predictions accessible via a simple dashboard and REST API.
 
-The model is trained using a Random Forest Classifier on the [Kaggle Heart Disease dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset).
+The model is trained using a DecisionTree, LogisticRegression, RandomForest, SVM and KNN on the [Pima Indians Diabetes Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database).
 
 <br/>
 
@@ -14,10 +14,11 @@ The model is trained using a Random Forest Classifier on the [Kaggle Heart Disea
 <br/>
 
 ## 🌟 Features
-- **Machine Learning Model**: Random Forest Classifier trained on heart disease dataset.
+- **Machine Learning Model**: DecisionTree trained on Pima Indians Diabetes Dataset.
 - **RESTful API**: Clean, well-documented endpoints using FastAPI.
+- **Stress Testing**: Define user behaviour, and swarm a system with millions of simultaneous users.
 - **Type Safety**: Full Pydantic schema validation
-- **Auto Documentation**: Interactive API docs with Swagger UI
+- **Auto Documentation**: Interactive API docs with Swagger UI, ReDoc
 - **Dockerized** for easy deployment.
 - **Live on Render** with automatic documentation.
 
@@ -25,22 +26,25 @@ The model is trained using a Random Forest Classifier on the [Kaggle Heart Disea
 
 ## 📂 Project Structure
 ```bash
-PredictHeartDisease/
+DiabetesPrediction/
 ├── app
-│ ├── templates/
-│ │ ├── index.html  # User interface
-│ │ ├── style.css   # style file
-│ ├── main.py       # FastAPI app entry point
-│ ├── schemas.py    # Pydantic request/response models
-│ ├── model_train_logistic.py # Train model with Logistic Regression
-│ └── model_train_random.py   # Train model with Random Forest lassifier
+│ ├── static/
+│ │ ├── index.html      # User interface
+│ │ ├── styles.css      # style file
+│ │ └── app.js 
+│ ├── main.py           # FastAPI entry point
+│ ├── schemas.py        # Pydantic request/response models
+│ ├── ml_model.py 
+│ └── model_train.py    # Train model with Random Forest lassifier
 ├── model/
-│ └── heart_model.joblib    # Trained ML model
+│ ├── diabetes_model.joblib # Trained ML model
+│ └── metrics.json    
 ├── sample_data/
-│ └── heart.csv             # Sample data in csv format
+│ └── diabetes.csv          # Sample data in csv format
 ├── requirements.txt        # Python dependencies
 ├── Dockerfile              # Docker image definition
 ├── docker-compose.yml      # Optional docker-compose setup
+├── run_server.py           # Application entry point FastAPI and Locust both 
 └── README.md               # Project documentation
 ```
 
@@ -50,21 +54,21 @@ PredictHeartDisease/
 
 ### 1. Prerequisites
 ```bash
-- Python 3.8+
+- Python 3.13.7
 - pip (Python package manager)
 ```
 
 ### 2. Clone the repository
 ```bash
-git clone https://github.com/Aronno1920/Predict-Heart-Disease.git
-cd PredictHeartDisease
+git clone https://github.com/Aronno1920/Diabetes-Prediction.git
+cd DiabetesPrediction
 ```
 ### 3. Create and activate a virtual environment
 ```bash
 # On Windows PowerShell
 python -m venv venv
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-.\venv\Scripts\activate
+# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+venv\Scripts\activate
 
 # On Linux/Mac
 python -m venv env
@@ -76,54 +80,42 @@ pip install -r requirements.txt
 ```
 ### 5. Train the model (if not already trained)
 ```bash
-# On Random Forest Classifier
-python model_train_random.py
-
-# For Logistic Regression
-python model_train_logistic.py
+# For training model and build joblib
+python model_train.py
 ```
-### 6. Run the API locally
+### 6. Run the API and Locust locally
 ```bash
-uvicorn app.main:app --reload
+python run_server.py
 
+-------
 API will be available at:
-API ➡ http://127.0.0.1:8000
-Swagger Docs ➡ http://127.0.0.1:8000/docs
-ReDoc ➡ http://127.0.0.1:8000/redoc
-```
+API ➡ http://localhost:8000
+Swagger Docs ➡ http://localhost:8000/docs
+ReDoc ➡ http://localhost:8000/redoc
 
-### 7. Run the API locally
-```bash
-uvicorn app.main:app --reload
-
-API will be available at:
-API ➡ http://127.0.0.1:8000
-Swagger Docs ➡ http://127.0.0.1:8000/docs
-ReDoc ➡ http://127.0.0.1:8000/redoc
+-------
+Locust will be available at:
+ReDoc ➡ http://localhost:8089
 ```
 
 <br/>
 
 ## 📖 API Endpoints
-### Main ML API (`app.main`)
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/health` | Health check endpoint |
 | GET | `/info` | Model information |
-| POST | `/predict` | Predict Iris species |
+| GET | `/metrics` | Best model and algorithm AOC |
+| POST | `/predict` | Predict Diabetes Prediction |
 
 <br/>
 
-## 🐳 Run with Docker
-```bash
-docker build -t heart-disease-api .
-docker run -p 8000:8000 heart-disease-api
-```
 ## 🌐 Deployed API
 ```bash
 Live Endpoint:
 Base URL: https://heart-disease-prediction-joq2.onrender.com
+
 API Endpoints:
 Method	Endpoint	Description
 GET	/health	Check if the API is running
@@ -135,25 +127,22 @@ POST /predict
 Request Body:
 ```bash
 {
-  "age": 63,
-  "sex": 1,
-  "cp": 3,
-  "trestbps": 145,
-  "chol": 233,
-  "fbs": 1,
-  "restecg": 0,
-  "thalach": 150,
-  "exang": 0,
-  "oldpeak": 2.3,
-  "slope": 0,
-  "ca": 0,
-  "thal": 1
+  "Pregnancies": 1,
+  "Glucose": 85,
+  "BloodPressure": 66,
+  "SkinThickness": 29,
+  "Insulin": 0,
+  "BMI": 26.6,
+  "DiabetesPedigreeFunction": 0.351,
+  "Age": 31
 }
 ```
 Response:
 ```bash
 {
-  "heart_disease": true
+  "prediction": 0,
+  "result": "Not Diabetic",
+  "confidence": 1
 }
 ```
 
@@ -171,15 +160,13 @@ Do you want me to also include a **cURL command** example so users can test `/pr
 
 ## 📸 Screenshots
 ![API Performance Comparison](screenshot/Screenshot_1.png)
-*Screenshot of User Interface - Heart Disease Prediction*
+*Screenshot of User Interface - Diabetes Prediction System*
 ![API Performance Comparison](screenshot/Screenshot_2.png)
-*Screenshot of Negative - Heart Disease Prediction*
-![API Performance Comparison](screenshot/Screenshot_3.png)
-*Screenshot of Positive - Heart Disease Prediction*
+*Screenshot of Not Diabatic - Prediction result of System*
 
 <br/>
 
 ---
 
 **Author**: [Selim Ahmed](https://github.com/aronno1920)  
-**Project**: Predict Heart Disease (FastAPI/GUI)
+**Project**: Diabetes Prediction System (FastAPI/GUI)
