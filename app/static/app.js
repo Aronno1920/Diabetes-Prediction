@@ -1,5 +1,5 @@
 // === Config: set your backend URL here ===
-const API_BASE_URL = "http://127.0.0.1:8000"; // change to your Render URL in prod
+const API_BASE_URL = "http://127.0.0.1:8000"; 
 
 // --- Helpers ---
 const $ = (id) => document.getElementById(id);
@@ -156,22 +156,10 @@ function renderMetricsTable(obj) {
   return `<table class="table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-// async function fetchMetrics() {
-//   const el = $("metrics");
-//   try {
-//     const res = await fetch(`${API_BASE_URL}/metrics`);
-//     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-//     const data = await res.json();
-//     el.innerHTML = renderMetricsTable(data);
-//   } catch (e) {
-//     el.innerHTML = `<p class="subtle">Metrics not available.</p>`;
-//   }
-// }
 
 // --- Init ---
 document.addEventListener("DOMContentLoaded", () => {
   $("predict-form").addEventListener("submit", onSubmit);
   fetchHealth();
   fetchInfo();
-  fetchMetrics();
 });

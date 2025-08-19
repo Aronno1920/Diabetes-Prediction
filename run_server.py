@@ -7,13 +7,13 @@ if __name__ == "__main__":
 
     # Start FastAPI app in a subprocess
     fastapi_proc = subprocess.Popen(
-        [sys.executable, "-m", "uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", "8000"]
+        [sys.executable, "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
     )
 
     # Start Locust in another subprocess (point to stress_test/locustfile.py)
     locust_file = os.path.join("stress_test", "locustfile.py")
     locust_proc = subprocess.Popen(
-        [sys.executable, "-m", "locust", "-f", locust_file, "--host", "http://127.0.0.1:8000"]
+        [sys.executable, "-m", "locust", "-f", locust_file, "--host", "http://0.0.0.0:8000"]
     )
 
     try:
