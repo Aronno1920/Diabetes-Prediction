@@ -148,6 +148,25 @@ Response:
 
 <br/>
 
+🚦 Stress Testing with Locust
+**1.** Visit 👉 http://localhost:8089
+**2.** Enter:
+          - Host → http://localhost:8000
+          - Users → Number of simulated users
+          - Spawn rate → Requests per second
+**3.** Run the test and analyze live metrics.
+
+<br/>
+
+📌 Technologies Used
+- Backend: FastAPI, Uvicorn
+- Frontend: HTML, CSS, JavaScript
+- ML: Scikit-learn (Pima Indians Diabetes Dataset)
+- Testing: Locust
+- Deployment: Docker, Docker Compose
+
+<br/>
+
 I included:
 - Deployment link
 - Installation steps
