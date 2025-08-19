@@ -150,13 +150,17 @@ Response:
 <br/>
 
 ## 🚦 Stress Testing with Locust
-**1.** Visit: http://localhost:8089<br/>
-**2.** Enter:<br/>
-- Host → http://localhost:8000<br/>
-- Users → Number of simulated users<br/>
-- Spawn rate → Requests per second<br/>
-
-**3.** Run the test and analyze live metrics.
+<ol>
+  <li>Visit: http://localhost:8089</li>
+  <li>Enter:
+    <ul>
+      <li>Host → http://localhost:8000</li>
+      <li>Users → Number of simulated users</li>
+      <li>Spawn rate → Requests per second</li>
+    </ul>
+  </li>
+  <li>Run the test and analyze live metrics.</li>
+</ol>
 
 <br/>
 
