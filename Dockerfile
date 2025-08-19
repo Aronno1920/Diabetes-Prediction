@@ -11,8 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 4. Copy project files
 COPY . .
 
-# 5. Expose port
-EXPOSE 8000
+# 5. Expose ports (FastAPI + Locust)
+EXPOSE 8000 8089
 
-# 6. Run app
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# 6. Run FastAPI + Locust via run_server.py
+CMD ["python", "run_server.py"]
