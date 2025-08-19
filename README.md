@@ -24,6 +24,15 @@ The model is trained using a DecisionTree, LogisticRegression, RandomForest, SVM
 
 <br/>
 
+## 📌 Technologies Used
+- **Backend**: FastAPI, Uvicorn
+- **Frontend**: HTML, CSS, JavaScript
+- **ML**: Scikit-learn (Pima Indians Diabetes Dataset)
+- **Testing**: Locust
+- **Deployment**: Docker, Docker Compose
+
+<br/>
+
 ## 📂 Project Structure
 ```bash
 DiabetesPrediction/
@@ -148,32 +157,13 @@ Response:
 
 <br/>
 
-🚦 Stress Testing with Locust
+## 🚦 Stress Testing with Locust
 **1.** Visit 👉 http://localhost:8089
 **2.** Enter:
           - Host → http://localhost:8000
           - Users → Number of simulated users
           - Spawn rate → Requests per second
 **3.** Run the test and analyze live metrics.
-
-<br/>
-
-📌 Technologies Used
-- Backend: FastAPI, Uvicorn
-- Frontend: HTML, CSS, JavaScript
-- ML: Scikit-learn (Pima Indians Diabetes Dataset)
-- Testing: Locust
-- Deployment: Docker, Docker Compose
-
-<br/>
-
-I included:
-- Deployment link
-- Installation steps
-- Docker instructions
-- Example API request/response
-- Swagger docs link
-Do you want me to also include a **cURL command** example so users can test `/predict` directly from the terminal? That could make the README even more developer-friendly.
 
 <br/>
 
