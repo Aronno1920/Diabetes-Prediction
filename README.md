@@ -29,7 +29,7 @@ The model is trained using a DecisionTree, LogisticRegression, RandomForest, SVM
 - **Frontend**: HTML, CSS, JavaScript
 - **ML**: Scikit-learn (Pima Indians Diabetes Dataset)
 - **Testing**: Locust
-- **Deployment**: Docker, Docker Compose
+- **Deployment**: Docker, Docker Compose, Render
 
 <br/>
 
@@ -123,15 +123,7 @@ ReDoc ➡ http://localhost:8089
 ## 🌐 Deployed API
 ```bash
 Live Endpoint:
-Base URL: https://heart-disease-prediction-joq2.onrender.com
-
-API Endpoints:
-Method	Endpoint	Description
-GET	/health	Check if the API is running
-GET	/info	Get model details and feature list
-POST	/predict	Predict heart disease based on input features
-📄 Example API Request
-POST /predict
+Base URL: https://diabetes-prediction-eggc.onrender.com
 ```
 Request Body:
 ```bash
@@ -158,11 +150,11 @@ Response:
 <br/>
 
 ## 🚦 Stress Testing with Locust
-**1.** Visit 👉 http://localhost:8089
-**2.** Enter:
-          - Host → http://localhost:8000
-          - Users → Number of simulated users
-          - Spawn rate → Requests per second
+**1.** Visit 👉 http://localhost:8089<br/>
+**2.** Enter:<br/>
+          - Host → http://localhost:8000<br/>
+          - Users → Number of simulated users<br/>
+          - Spawn rate → Requests per second<br/>
 **3.** Run the test and analyze live metrics.
 
 <br/>
