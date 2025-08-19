@@ -10,6 +10,7 @@ The model is trained using a DecisionTree, LogisticRegression, RandomForest, SVM
 ➡ **Live GUI**: [Click here](https://predict-heart-disease-0az6.onrender.com/) <br/>
 ➡ **Swagger Docs**: [Click here](https://predict-heart-disease-0az6.onrender.com/docs)<br/>
 ➡ **ReDoc**: [Click here](https://predict-heart-disease-0az6.onrender.com/redoc)
+
 <br/>
 
 ## 🌟 Features
